@@ -34,6 +34,12 @@ const AddPost = () => {
     }
 
     firestore.collection('posts').add(post)
+
+    setState({
+      ...state,
+      title: '',
+      content: ''
+    })
   }
 
   return (

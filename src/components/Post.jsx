@@ -12,6 +12,15 @@ const Post = ({
   stars,
   comments
 }) => {
+  const postRef = firestore.doc(`posts/${id}`)
+  const remove = () => postRef.delete()
+
+  const star = async () => {
+    postRef.update({
+      stars: stars + 1
+    })
+  }
+
   return (
     <article className="Post">
       <div className="Post--content">
@@ -33,14 +42,13 @@ const Post = ({
             {comments}
           </p>
           <p>Posted by {user.displayName}</p>
-          <p>{moment(createdAt).calendar()}</p>
+          <p>{moment(createdAt.toDate()).fromNow()}</p>
         </div>
         <div>
-          <button className="star">Star</button>
-          <button
-            className="delete"
-            onClick={() => firestore.doc(`posts/${id}`).delete()}
-          >
+          <button className="star" onClick={star}>
+            Star
+          </button>
+          <button className="delete" onClick={remove}>
             Delete
           </button>
         </div>
