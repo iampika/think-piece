@@ -1,18 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { firestore } from '../firebase'
-import { collectIdsAndDocs } from '../utils'
+import React from 'react'
 import Posts from './Posts'
-
-const useCollection = path => {
-  const [posts, setPosts] = useState([])
-
-  useEffect(() => {
-    return firestore.collection('posts').onSnapshot(snapshot => {
-      const posts = snapshot.docs.map(collectIdsAndDocs)
-      setPosts(posts)
-    })
-  }, [])
-}
+import useCollection from '../hooks/useCollection'
 
 const Application = () => {
   const posts = useCollection('posts')
