@@ -1,6 +1,7 @@
 import React from 'react'
 
 import moment from 'moment'
+import { firestore } from '../firebase'
 
 const Post = ({
   id,
@@ -9,8 +10,7 @@ const Post = ({
   user,
   createdAt,
   stars,
-  comments,
-  onRemove
+  comments
 }) => {
   return (
     <article className="Post">
@@ -39,7 +39,7 @@ const Post = ({
           <button className="star">Star</button>
           <button
             className="delete"
-            onClick={() => onRemove(id)}
+            onClick={() => firestore.doc(`posts/${id}`).delete()}
           >
             Delete
           </button>

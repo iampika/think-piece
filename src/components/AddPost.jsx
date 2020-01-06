@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import { firestore } from '../firebase'
 
-const AddPost = ({ onCreate }) => {
+const AddPost = () => {
   const [state, setState] = useState({
     title: '',
     content: ''
@@ -32,13 +33,7 @@ const AddPost = ({ onCreate }) => {
       createdAt: new Date()
     }
 
-    onCreate(post)
-
-    setState({
-      ...state,
-      title: '',
-      content: ''
-    })
+    firestore.collection('posts').add(post)
   }
 
   return (
