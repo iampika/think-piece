@@ -19,7 +19,6 @@ const AddPost = ({ onCreate }) => {
     event.preventDefault()
 
     const post = {
-      id: Date.now().toString(),
       title,
       content,
       user: {
