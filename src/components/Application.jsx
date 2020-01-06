@@ -21,7 +21,11 @@ const Application = () => {
     setPosts([...posts, newPost])
   }
 
-  const handleRemove = async id => {}
+  const handleRemove = async id => {
+    setPosts(posts.filter(post => post.id !== id))
+
+    await firestore.doc(`posts/${id}`).delete()
+  }
 
   return (
     <main className="Application">
